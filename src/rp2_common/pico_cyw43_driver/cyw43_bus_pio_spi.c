@@ -8,11 +8,9 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/pio.h"
 #include "hardware/clocks.h"
-#include "hardware/structs/iobank0.h"
 #include "hardware/sync.h"
 #include "hardware/dma.h"
 #include "cyw43_bus_pio_spi.pio.h"
@@ -65,7 +63,7 @@ static uint32_t counter = 0;
 
 //#define SWAP32(A) ((((A) & 0xff000000U) >> 8) | (((A) & 0xff0000U) << 8) | (((A) & 0xff00U) >> 8) | (((A) & 0xffU) << 8))
 __force_inline static uint32_t __swap16x2(uint32_t a) {
-    __asm ("rev16 %0, %0" : "+l" (a) : : );
+    pico_default_asm ("rev16 %0, %0" : "+l" (a) : : );
     return a;
 }
 #define SWAP32(a) __swap16x2(a)

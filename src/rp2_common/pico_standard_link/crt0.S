@@ -5,10 +5,11 @@
  */
 
 #include "pico.h"
+#include "pico/asm_helper.S"
+
 #include "hardware/regs/m0plus.h"
 #include "hardware/regs/addressmap.h"
 #include "hardware/regs/sio.h"
-#include "pico/asm_helper.S"
 #include "pico/binary_info/defs.h"
 
 #ifdef NDEBUG
@@ -17,9 +18,7 @@
 #endif
 #endif
 
-.syntax unified
-.cpu cortex-m0plus
-.thumb
+pico_default_asm_setup
 
 .section .vectors, "ax"
 .align 2
@@ -325,13 +324,13 @@ hold_non_core0_in_bootrom:
 // ----------------------------------------------------------------------------
 // Stack/heap dummies to set size
 
-.section .stack
+.section .stack, "a"
 // align to allow for memory protection (although this alignment is pretty much ignored by linker script)
 .align 5
     .equ StackSize, PICO_STACK_SIZE
 .space StackSize
 
-.section .heap
+.section .heap, "a"
 .align 2
     .equ HeapSize, PICO_HEAP_SIZE
 .space HeapSize

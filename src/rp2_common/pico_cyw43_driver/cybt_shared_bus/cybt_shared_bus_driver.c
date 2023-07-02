@@ -551,24 +551,14 @@ cybt_result_t cybt_get_bt_buf_index(cybt_fw_membuf_index_t *p_buf_index) {
 static cybt_result_t cybt_reg_write(uint32_t reg_addr, uint32_t value) {
     cybt_debug("cybt_reg_write 0x%08lx 0x%08lx\n", reg_addr, value);
     cyw43_ll_write_backplane_reg(cyw43_ll, reg_addr, value);
-<<<<<<< HEAD
-    if (reg_addr == HOST_CTRL_REG_ADDR)
-    {
-=======
     if (reg_addr == HOST_CTRL_REG_ADDR) {
->>>>>>> upstream/master
         host_ctrl_cache_reg = value;
     }
     return CYBT_SUCCESS;
 }
 
 static cybt_result_t cybt_reg_read(uint32_t reg_addr, uint32_t *p_value) {
-<<<<<<< HEAD
-    if (reg_addr == HOST_CTRL_REG_ADDR)
-    {
-=======
     if (reg_addr == HOST_CTRL_REG_ADDR) {
->>>>>>> upstream/master
         *p_value = host_ctrl_cache_reg;
         return CYBT_SUCCESS;
     }
@@ -601,12 +591,7 @@ static cybt_result_t cybt_mem_write(uint32_t mem_addr, const uint8_t *p_data, ui
     cybt_debug("cybt_mem_write addr 0x%08lx len %ld\n", mem_addr, data_len);
     do {
         uint32_t transfer_size = (data_len > CYW43_BUS_MAX_BLOCK_SIZE) ? CYW43_BUS_MAX_BLOCK_SIZE : data_len;
-<<<<<<< HEAD
-        if ((mem_addr & 0xFFF) + transfer_size > 0x1000)
-        {
-=======
         if ((mem_addr & 0xFFF) + transfer_size > 0x1000) {
->>>>>>> upstream/master
             transfer_size = 0x1000 - (mem_addr & 0xFFF);
         }
         cyw43_ll_write_backplane_mem(cyw43_ll, mem_addr, transfer_size, p_data);
@@ -624,12 +609,7 @@ static cybt_result_t cybt_mem_read(uint32_t mem_addr, uint8_t *p_data, uint32_t 
     cybt_debug("cybt_mem_read addr 0x%08lx len %ld\n", mem_addr, data_len);
     do {
         uint32_t transfer_size = (data_len > CYW43_BUS_MAX_BLOCK_SIZE) ? CYW43_BUS_MAX_BLOCK_SIZE : data_len;
-<<<<<<< HEAD
-        if ((mem_addr & 0xFFF) + transfer_size > 0x1000)
-        {
-=======
         if ((mem_addr & 0xFFF) + transfer_size > 0x1000) {
->>>>>>> upstream/master
             transfer_size = 0x1000 - (mem_addr & 0xFFF);
         }
         cyw43_ll_read_backplane_mem(cyw43_ll, mem_addr, transfer_size, p_data);

@@ -12,4 +12,4 @@
 	url = https://github.com/Mbed-TLS/mbedtls.git
 [submodule "lib/btstack"]
 	path = lib/btstack
-	url = https://github.com/bluekitchen/btstack.git
+	url = https://github.com/sanjay900/btstack.git
